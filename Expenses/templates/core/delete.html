@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<br<br><br><br><br>
+	<div class="container">
+		<div class="row">
+			<div class="col border">
+				<div>
+					<form action="#" method="post">
+						{% csrf_token %}
+					<table id="table" class="table table-sm table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Select</th>
+								<th scope="col">#</th>
+								<th scope="col">Date</th>								
+								<th scope="col">Payment Method</th>
+								<th scope="col">Category</th>
+								<th scope="col">Item</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% if expenses %}
+							{% for expense in expenses %}
+							<tr>
+								<td>
+										{% if expense.check %}
+										<div class="form-check">
+											<input class="form-check-input" value="{{ expense.id }}" checked="checked" type="checkbox" name="checkbox" id="flexCheckDefault">
+											<label class="form-check-label" for="flexCheckDefault"></label>
+										</div>
+										{% else %}
+										<div class="form-check">
+											<input class="form-check-input" value="{{ expense.id }}" type="checkbox" name="checkbox" id="flexCheckDefault">
+											<label class="form-check-label" for="flexCheckDefault"></label>
+										</div>
+										{% endif %}
+								</td>
+								<th scope="row">{{ expense.id }}</th>
+								<td>{{ expense.date }}</td>
+								<td>{{ expense.payment_method }}</td>
+								<td>{{ expense.category }}</td>
+								<td>{{ expense.item }}</td>
+								<td>{{ expense.quantity }}</td>
+								<td>{{ expense.amount }} ₺</td>
+							</tr>
+
+							{% endfor %}
+							{% endif %}
+						</tbody>
+					</table>
+					<button class="btn btn-danger" type="submit">
+						<span class="mdi mdi-delete mdi-24px"> Delete</span>
+					</button>
+					</form>
+				</div>
+			</div>
+			<!----- ===== Delete 
+			<div class="col-4 border">
+				<div class="header"><h3>Add an Expense</h3></div>
+				<form action="#" method="post">
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="basic-addon1">Payment Method</span>
+					<input type="text" class="form-control" name="payment_method" aria-label="Payment_Method" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="basic-addon2">Category</span>
+					<input type="text" class="form-control" name="category" aria-label="Category" aria-describedby="basic-addon2">
+				</div>
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="basic-addon3">Item</span>
+					<input type="text" class="form-control" name="item" aria-label="Item" aria-describedby="basic-addon3">
+				</div>
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="basic-addon4">Quantity</span>
+					<input type="number" class="form-control" name="quantity" aria-label="Quantity" aria-describedby="basic-addon4">
+				</div>
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="basic-addon5">Amount</span>
+					<input type="text" class="form-control" name="amount" aria-label="Amount" aria-describedby="basic-addon5">
+					<span class="input-group-text">₺</span>
+				</div>
+				<div class="input-group mb-3">
+					<button id="addExpense" class="btn btn-success mx-auto">Add Expense</button>
+				</div>
+				</form>
+			</div>
+			==== ---->
+		</div>
+	</div>
+{% endblock %}
